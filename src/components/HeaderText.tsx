@@ -1,9 +1,9 @@
 
 
-const Hero = () => {
+const HeaderText = () => {
     return (
         <div className="bg-blue-800 pb-16">
-            <div className="container mx-auto flex flex-col gap-2">
+            <div className="container mx-auto px-4 flex flex-col gap-2">
                 <h1 className="text-5xl text-white font-bold">
                     Find your next stay
                 </h1>
@@ -15,4 +15,4 @@ const Hero = () => {
     );
 };
 
-export default Hero;
+export default HeaderText;
