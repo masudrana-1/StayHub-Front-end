@@ -1,10 +1,15 @@
-import React from 'react';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Layout from "./layout/Layout";
 
 const App = () => {
   return (
-    <div>
-      {/* <h1 className='text-orange-700 text-3xl'>StayHub</h1> */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={ <Layout></Layout> } />
+        <Route/>
+        <Route/>
+      </Routes>
+    </Router>
   );
 };
 
