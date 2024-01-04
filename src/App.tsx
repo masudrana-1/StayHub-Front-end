@@ -5,8 +5,20 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={ <Layout></Layout> } />
-        <Route/>
+        <Route
+          path="/"
+          element={
+          <Layout>
+            <h1>Home Page</h1>
+            </Layout>}
+        />
+        <Route
+          path="/search"
+          element={
+          <Layout>
+            <h1>Search Page</h1>
+          </Layout> }
+        />
         <Route/>
       </Routes>
     </Router>
