@@ -10,11 +10,18 @@ type RegisterFormData = {
 }
 
 const Register = () => {
-    const {register, watch} = useForm<RegisterFormData>()
+    const { register, watch, handleSubmit, formState: {errors} } = useForm<RegisterFormData>()
+    
+    const onSubmit = handleSubmit((data) => {
+        console.log(data)
+    })
 
 
     return (
-        <form className="flex flex-col gap-5">
+        <form
+            onSubmit={onSubmit}
+            className="flex flex-col gap-5"
+        >
             <h2 className="text-3xl font-bold">Create an Account</h2>
             <div className="flex flex-col md:flex-row gap-5">
                 <label className="text-gray-700 text-sm font-bold flex-1">
@@ -57,8 +64,8 @@ const Register = () => {
                     {...register("password", {
                         required: "This field is required",
                         minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters",
+                            value: 6,
+                            message: "Password must be at least 6 characters",
                         },
                     })}
                 ></input>
@@ -72,12 +79,15 @@ const Register = () => {
                     type="password"
                     className="border rounded w-full py-1 px-2 font-normal"
                     {...register("confirmPassword", {
+
+                        // password validation 
+                        // watch field watch password and check
                         validate: (val) => {
-                        if (!val) {
-                            return "This field is required";
-                        } else if (watch("password") !== val) {
-                            return "Your passwords do no match";
-                        }
+                            if (!val) {
+                                return "This field is required";
+                            } else if (watch("password") !== val) {
+                                return "Your passwords do no match";
+                            }
                         },
                     })}
                 ></input>
@@ -85,6 +95,14 @@ const Register = () => {
                 <span className="text-red-500">{errors.confirmPassword.message}</span>
                 )} */}
             </label>
+            <span>
+                <button
+                    type="submit"
+                    className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
+                    >
+                    Create Account
+                </button>
+            </span>
         </form>
     );
 };
