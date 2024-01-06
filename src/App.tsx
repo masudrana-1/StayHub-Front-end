@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./layout/Layout";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
             <h1>Search Page</h1>
           </Layout> }
         />
-        <Route/>
+        <Route path="/register" element={ <Layout><Register/></Layout> } />
       </Routes>
     </Router>
   );
