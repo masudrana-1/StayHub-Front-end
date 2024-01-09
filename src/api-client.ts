@@ -24,9 +24,9 @@ export const register =async (formData:RegisterFormData) => {
 }
 
 // get token 
-export const  validateToken =async () => {
+export const validateToken = async () => {
     const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
-        credentials: "include"
+        credentials: "include",
     });
 
     if (!response.ok) {
@@ -34,4 +34,4 @@ export const  validateToken =async () => {
     }
 
     return response.json();
-}
+};
