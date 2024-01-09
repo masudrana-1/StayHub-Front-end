@@ -9,7 +9,7 @@ export const register =async (formData:RegisterFormData) => {
         method: "POST",
         // set cookies
         credentials: "include",
-        
+
         headers: {
             "Content-type": "application/json"
         },
@@ -21,4 +21,17 @@ export const register =async (formData:RegisterFormData) => {
     if (!response.ok) {
         throw new Error(responseBody.message);
     }
+}
+
+// get token 
+export const  validateToken =async () => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+        credentials: "include"
+    });
+
+    if (!response.ok) {
+        throw new Error("Token invalid");
+    }
+
+    return response.json();
 }

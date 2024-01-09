@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Toast from "../components/Toast";
+import { useQuery } from "react-query";
 
 // toast 
 type ToastMessage = {
@@ -9,7 +10,8 @@ type ToastMessage = {
 
 type AppContext = {
     showToast: (toastMessage: ToastMessage) => void;
-    // isLoggedIn: boolean;
+    // check login 
+    isLoggedIn: boolean;
     // stripePromise: Promise<Stripe | null>;
 };
 
@@ -20,12 +22,16 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
     // toast 
     const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
 
+    // http cookie 
+    const { isError } = useQuery("validateToken", apiClient.validateToken, { retry: false })
 
     return (
         <AppContext.Provider
             value={{
-                showToast: (toastMessage) =>
-                    setToast(toastMessage)
+                showToast: (toastMessage) => {
+                    setToast(toastMessage);
+                },
+                isLoggedIn: !isError
         }}>
 
             {/* toast  */}
