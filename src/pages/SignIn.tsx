@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
+// import { useAppContext } from '../context/AppContext';
 
 
 export type SignInFormData = {
@@ -10,7 +11,19 @@ export type SignInFormData = {
 
 const SignIn = () => {
 
-    const {register}= useForm<SignInFormData>()
+    // toast 
+    // const { showToast } = useAppContext();
+    // navigate
+    // const navigate = useNavigate();
+    // query 
+    // const queryClient = useQueryClient();
+
+    const { register, formState: { errors } } = useForm<SignInFormData>()
+    
+
+    const onSubmit = () => {
+    
+    };
 
     return (
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
@@ -23,7 +36,7 @@ const SignIn = () => {
                     {...register("email", { required: "This field is required" })}
                 ></input>
                 {errors.email && (
-                <span className="text-red-500">{errors.email.message}</span>
+                    <span className="text-red-500">{errors.email.message}</span>
                 )}
             </label>
             <label className="text-gray-700 text-sm font-bold flex-1">
