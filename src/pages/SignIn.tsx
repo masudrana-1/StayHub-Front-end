@@ -1,7 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, } from 'react-router-dom';
-// import { useAppContext } from '../context/AppContext';
+import { useAppContext } from '../context/AppContext';
+import * as apiClient from '../api-client';
+import { useMutation } from 'react-query';
 
 
 export type SignInFormData = {
@@ -12,18 +14,29 @@ export type SignInFormData = {
 const SignIn = () => {
 
     // toast 
-    // const { showToast } = useAppContext();
+    const { showToast } = useAppContext();
     // navigate
     // const navigate = useNavigate();
     // query 
     // const queryClient = useQueryClient();
 
-    const { register, formState: { errors } } = useForm<SignInFormData>()
+    const { register, formState: { errors }, handleSubmit } = useForm<SignInFormData>()
+
+    const mutation = useMutation(apiClient.signIn, {
+        onSuccess: async () => {
+            showToast({ message: "Sign in Successful!", type: "SUCCESS" });
+            // await queryClient.invalidateQueries("validateToken");
+            // navigate(location.state?.from?.pathname || "/");
+        },
+        onError: (error: Error) => {
+            showToast({ message: error.message, type: "ERROR" });
+        },
+    });
     
 
-    const onSubmit = () => {
-    
-    };
+    const onSubmit = handleSubmit((data) => {
+        mutation.mutate(data);
+    });
 
     return (
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
