@@ -21,8 +21,20 @@ const App = () => {
             <h1>Search Page</h1>
           </Layout> }
         />
-        <Route path="/register" element={ <Layout><Register/></Layout> } />
-        <Route path="/sign-in" element={ <Layout><SignIn/></Layout> } />
+        <Route
+          path="/register"
+          element={
+            <Layout>
+              <Register />
+            </Layout>}
+        />
+        <Route
+          path="/sign-in"
+          element={
+            <Layout>
+              <SignIn />
+            </Layout>}
+        />
       </Routes>
     </Router>
   );
